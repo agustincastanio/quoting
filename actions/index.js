@@ -1,12 +1,11 @@
 import axios from 'axios'
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = process.env.VERCEL_URL || 'http://localhost:3000'
 
 const categories = [
- {id: '1', name: 'Activa'},
- {id: '2', name: 'Archivada'},
- {id: '3', name: 'Borrador'}
+  { id: '1', name: 'Activa' },
+  { id: '2', name: 'Archivada' },
+  { id: '3', name: 'Borrador' }
 ]
-
 
 export const getMovies = () => {
   return axios.get(`${BASE_URL}/api/v1/movies`)
