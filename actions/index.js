@@ -1,8 +1,8 @@
 import axios from 'axios'
-const BASE_URL2 = 'https://' + process.env.VERCEL_URL || 'http://localhost:3000'
-console.log(BASE_URL2)
 
-const BASE_URL = 'https://quoting-kappa.vercel.app'
+const BASE_URL = 'https://' + process.env.VERCEL_URL || 'http://localhost:3000'
+
+//const BASE_URL = 'https://quoting-kappa.vercel.app'
 
 const categories = [
   { id: '1', name: 'Activa' },
