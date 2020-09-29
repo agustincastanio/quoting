@@ -1,30 +1,31 @@
-import fs from 'fs'
-import data from './data.json'
-const filePath = './data.json'
+import { connectToDatabase } from '../../../util/mongodb'
 
-export default (req, res) => {
+export default async (req, res) => {
+
+    const { db } = await connectToDatabase()
     const { method } = req
 
     switch (method) {
         case 'GET':
-            res.status(200).json(data)
-            break
+            try {
+                const items = await db.collection('movies').find().toArray()
+                return res.status(200).json(items)
+            } catch (err) {
+                console.log(err)
+                return res.status(422).send(err)
+            }
         case 'POST':
             const movie = req.body
-            data.push(movie)
 
-            const stringifiedData = JSON.stringify(data, null, 2)
-
-            fs.writeFile(filePath, stringifiedData, function (err) {
-                if (err) {
-                    return res.status(422).send(err)
-                }
-
-                return res.json('File Sucesfully updated')
-            })
-            break
+            try {
+                await db.collection('movies').insertOne(movie);
+                return res.json('Movie Sucesfully updated')
+            } catch (err) {
+                console.log(err)
+                return res.status(422).send(err)
+            }
         default:
-            res.setHeader('Allow', ['GET', 'PUT'])
+            res.setHeader('Allow', ['GET', 'POST'])
             res.status(405).end(`Method ${method} Not Allowed`)
     }
 }

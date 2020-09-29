@@ -1,46 +1,48 @@
-import fs from 'fs'
-import data from '../data.json'
-const filePath = '../data.json'
+import { connectToDatabase } from '../../../../util/mongodb'
+import { ObjectId } from 'mongodb';
 
-export default (req, res) => {
+export default async (req, res) => {
+
+    const { db } = await connectToDatabase()
     const { method } = req
     const id = req.query.id
-    const index = data.findIndex(m => m.id === id)
 
     switch (method) {
         case 'GET':
-            const movie = data.find(m => m.id === id)
-            res.status(200).json(movie)
-            break
+            try {
+                const movie = await db.collection('movies').findOne({ '_id': new ObjectId(id) });
+                return res.status(200).json(movie)
+            } catch (err) {
+                console.log(err)
+                return res.status(422).send(err)
+            }
         case 'DELETE':
-            data.splice(index, 1)
-
-            const stringifiedData = JSON.stringify(data, null, 2)
-
-            fs.writeFile(filePath, stringifiedData, function (err) {
-                if (err) {
-                    return res.status(422).send(err)
-                }
-
-                return res.json('File Sucesfully updated')
-            })
-            break
+            try {
+                await db.collection('movies').deleteOne({ '_id': new ObjectId(id) });
+                return res.json('Movie Sucesfully deleted')
+            } catch (err) {
+                console.log(err)
+                return res.status(422).send(err)
+            }
         case 'PATCH':
             const movieBody = req.body
-            data[index] = movieBody
+            try {
+                const query = { '_id': new ObjectId(id) };
+                const options = {
+                    upsert: false,
+                };
+                const replacement = { ...movieBody }
 
-            const stringifiedData2 = JSON.stringify(data, null, 2)
+                await db.collection('movies').replaceOne(query, replacement, options);
 
-            fs.writeFile(filePath, stringifiedData2, function (err) {
-                if (err) {
-                    return res.status(422).send(err)
-                }
+                return res.json('Movie Sucesfully updated')
+            } catch (err) {
+                console.log(err)
+                return res.status(422).send(err)
+            }
 
-                return res.json('File Sucesfully updated')
-            })
-            break
         default:
-            res.setHeader('Allow', ['GET', 'PUT'])
+            res.setHeader('Allow', ['GET', 'DELETE', 'PATCH'])
             res.status(405).end(`Method ${method} Not Allowed`)
     }
 }
