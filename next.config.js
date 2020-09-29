@@ -5,3 +5,9 @@ module.exports = {
     includePaths: [path.join(__dirname, 'styles')],
   },
 }
+
+module.exports = {
+  env: {
+    SERVER: process.env.SERVER,
+  },
+};
