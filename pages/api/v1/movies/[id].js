@@ -1,17 +1,23 @@
 import { connectToDatabase } from '../../../../util/mongodb'
 import { ObjectId } from 'mongodb';
+import objectRenameKeys from 'object-rename-keys';
 
 export default async (req, res) => {
 
     const { db } = await connectToDatabase()
     const { method } = req
     const id = req.query.id
+    const changesMap = {
+        _id: 'id'
+    }
 
     switch (method) {
         case 'GET':
             try {
                 const movie = await db.collection('movies').findOne({ '_id': new ObjectId(id) });
-                return res.status(200).json(movie)
+                const movieNew = objectRenameKeys(movie, changesMap);
+
+                return res.status(200).json(movieNew)
             } catch (err) {
                 console.log(err)
                 return res.status(422).send(err)

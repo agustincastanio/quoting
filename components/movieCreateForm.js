@@ -85,22 +85,22 @@ class MovieCreateForm extends React.Component {
     return (
       <form>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Dirección</label>
           <input
-            value={form.name}
+            value={form.address}
             onChange={this.handleChange}
             name="name"
             type="text"
-            className="form-control" id="name" aria-describedby="emailHelp" placeholder="Lord of the Rings" />
+            className="form-control" id="name" aria-describedby="emailHelp" placeholder="" />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">Ciudad</label>
           <input
-            value={form.description}
+            value={form.city}
             onChange={this.handleChange}
             name="description"
             type="text"
-            className="form-control" id="description" placeholder="Somewhere in Middle-earth..." />
+            className="form-control" id="description" placeholder="CABA" />
         </div>
         <div className="form-group">
           <label htmlFor="description">Rating</label>

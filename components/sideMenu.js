@@ -33,7 +33,7 @@ class SideMenu extends React.Component {
             onClick={() => this.props.changeCategory('all')}
             href="#"
             className={`list-group-item ${this.props.activeCategory === 'all' ? 'active' : ''}`}>Todas
-            </a>
+          </a>
           {this.props.categories.map(c => (
             <a
               key={c.id}

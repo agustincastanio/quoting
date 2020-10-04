@@ -1,8 +1,11 @@
-1. finish cotizaciones ABM (+ items)
-2. handle cotización endDate
-3. handle cotización referenceTotal
-4. start proveedor side
+
+3. handle cotización endDate
+4. handle cotización referenceTotal (and different currencies)
+5. start proveedor side
+6. fix serverless cold starts
 7. remove movie from URL path
+8. google maps address autocomplete
+8. use https://github.com/remaxjs/remax-swr instead of axios
 
 
 Testing locally in Windows:

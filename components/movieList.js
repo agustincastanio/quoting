@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const MovieList = (props) => {
   const { movies } = props
-  const shorten = (text) => text.substr(0, 100) + '...'
+  //const shorten = (text) => text.substr(0, 100) + '...'
   return (
     <React.Fragment>
       { movies.length > 0 ?
@@ -21,8 +21,8 @@ const MovieList = (props) => {
                       <a>{movie.address}</a>
                     </Link>
                   </h4>
-                  <h6 className="card-subtitle mb-2 text-muted">{movie.requestType}</h6>
-                  <h5>{movie.city}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">{movie.city}</h6>
+                  <h5>{movie.requestType}</h5>
                   <p className="card-text">{movie.referencetotal + ' ' + movie.referenceCurrency}</p>
                 </div>
                 <div className="card-footer">

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Router from 'next/router';
-import Link from 'next/link'
+import Router from 'next/router'
 import SideMenu from '../components/sideMenu'
 import MovieList from '../components/movieList'
 import { getMovies, getCategories } from '../actions'

@@ -1,15 +1,23 @@
-import { connectToDatabase } from '../../../util/mongodb'
+import { connectToDatabase } from '../../../../util/mongodb'
+import objectRenameKeys from 'object-rename-keys';
 
 export default async (req, res) => {
 
     const { db } = await connectToDatabase()
     const { method } = req
+    const changesMap = {
+        _id: 'id'
+    }
 
     switch (method) {
         case 'GET':
             try {
                 const items = await db.collection('movies').find().toArray()
-                return res.status(200).json(items)
+                items.forEach(function (movie) {
+                    
+                });
+                const itemsNew = objectRenameKeys(items, changesMap);
+                return res.status(200).json(itemsNew)
             } catch (err) {
                 console.log(err)
                 return res.status(422).send(err)
@@ -19,7 +27,7 @@ export default async (req, res) => {
 
             try {
                 await db.collection('movies').insertOne(movie);
-                return res.json('Movie Sucesfully updated')
+                return res.json('Movie Sucesfully created')
             } catch (err) {
                 console.log(err)
                 return res.status(422).send(err)

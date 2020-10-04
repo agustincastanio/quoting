@@ -11,27 +11,24 @@ const Movie = (props) => {
   }
 
   return (
-    <div class="container">
-      <div class="jumbotron">
-        <h1 class="display-4">{movie.name}</h1>
-        <p class="lead">{movie.description}</p>
-        <hr class="my-4" />
-        <p>{movie.genre}</p>
-        <a class="btn btn-primary btn-lg mr-1" href="#" role="button">Learn more</a>
+    <div className="container">
+      <div className="jumbotron">
+        <h1 className="display-4">{movie.address}</h1>
+        <p className="lead">{movie.city}</p>
+        <hr className="my-4" />
+        <p>{movie.requestType}</p>
+        <p>{movie.referencetotal + ' ' + movie.referenceCurrency}</p>
         <button
-           onClick={() => router.push(`/movies/${id}/edit`)}
-           class="btn btn-warning btn-lg mr-1"
-           type="button">Update
+          onClick={() => router.push(`/movies/${id}/edit`)}
+          className="btn btn-warning btn-lg mr-1"
+          type="button">Update
         </button>
         <button
-           onClick={() => handleDelete(id)}
-           class="btn btn-danger btn-lg"
-           type="button">Delete
+          onClick={() => handleDelete(id)}
+          className="btn btn-danger btn-lg"
+          type="button">Delete
         </button>
       </div>
-      <p>
-      {movie.longDesc}
-      </p>
     </div>
   )
 }
