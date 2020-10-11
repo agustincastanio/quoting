@@ -19,3 +19,12 @@ MongoDB
 
     Start service from command line:
         "C:\Program Files\MongoDB\Server\4.4\bin\mongod.exe" --dbpath="c:\data\db"
+
+
+Needed hosting services:
+. Vercel
+. Github
+. MongoDB Atlas
+. Namecheap Domain registration
+. Cloudflare DNS and CDN
+. Gsuite
