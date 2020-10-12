@@ -17,4 +17,4 @@ AddressTypeSchema.set('toJSON', {
   },
 });
 
-export default mongoose.model('AddressType', AddressTypeSchema)
+export default mongoose.models.AddressType || mongoose.model('AddressType', AddressTypeSchema)

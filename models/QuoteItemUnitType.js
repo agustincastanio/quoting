@@ -17,4 +17,4 @@ QuoteItemUnitTypeSchema.set('toJSON', {
   },
 });
 
-export default mongoose.model('QuoteItemUnitType', QuoteItemUnitTypeSchema)
+export default mongoose.models.QuoteItemUnitType || mongoose.model('QuoteItemUnitType', QuoteItemUnitTypeSchema)

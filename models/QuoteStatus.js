@@ -17,4 +17,4 @@ QuoteStatusSchema.set('toJSON', {
   },
 });
 
-export default mongoose.model('QuoteStatus', QuoteStatusSchema)
+export default mongoose.models.QuoteStatus || mongoose.model('QuoteStatus', QuoteStatusSchema)

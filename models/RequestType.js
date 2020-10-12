@@ -17,4 +17,4 @@ RequestTypeSchema.set('toJSON', {
   },
 });
 
-export default mongoose.model('RequestType', RequestTypeSchema)
+export default mongoose.models.RequestType || mongoose.model('RequestType', RequestTypeSchema)

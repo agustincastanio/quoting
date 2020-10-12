@@ -34,4 +34,4 @@ QuoteItemSchema.set('toJSON', {
   },
 });
 
-export default mongoose.model('QuoteItem', QuoteItemSchema)
+export default mongoose.models.QuoteItem || mongoose.model('QuoteItem', QuoteItemSchema)

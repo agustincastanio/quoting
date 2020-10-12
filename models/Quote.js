@@ -62,4 +62,4 @@ QuoteSchema.set('toJSON', {
   },
 });
 
-export default mongoose.model('Quote', QuoteSchema)
+export default mongoose.models.Quote || mongoose.model('Quote', QuoteSchema)

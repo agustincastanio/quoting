@@ -22,4 +22,4 @@ CurrencySchema.set('toJSON', {
   },
 });
 
-export default mongoose.model('Currency', CurrencySchema)
+export default mongoose.models.Currency || mongoose.model('Currency', CurrencySchema)

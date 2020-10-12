@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react'
 import Router from 'next/router'
 import SideMenu from '../components/sideMenu'
 import MovieList from '../components/movieList'
-import { getMovies, getCategories } from '../actions'
+import { getQuotes, getQuoteStatus } from '../actions'
 
 const MAX_IMAGES = 3
 
 const Home = (props) => {
-  const { movies = [], categories = [] } = props
+  const { quotes = [], categories = [] } = props
   const [images, setImages] = useState([])
   const [filter, setFilter] = useState('all')
 
   useEffect(() => {
-    const { movies } = props
-    const images = movies.slice(0, 3).map(m => ({ cover: m.cover, id: m.id }))
+    const { quotes } = props
+    const images = quotes.slice(0, 3).map(q => ({ cover: q.cover, id: q.id }))
     setImages(images)
   }, []);
 
@@ -21,17 +21,17 @@ const Home = (props) => {
     setFilter(category)
   }
 
-  const filterMovies = (movies) => {
+  const filterQuotes = (quotes) => {
     if (filter === 'all') {
-      return movies
+      return quotes
     }
 
-    return movies.filter(m => {
-      return m.status && m.status.includes(filter)
+    return quotes.filter(q => {
+      return q.status && q.status.includes(filter)
     })
   }
 
-  const addMovieToList = () => {
+  const addQuoteToList = () => {
     Router.push('/')
   }
 
@@ -47,13 +47,13 @@ const Home = (props) => {
               <SideMenu
                 activeCategory={filter}
                 changeCategory={changeCategory}
-                addMovieToList={addMovieToList}
+                addQuoteToList={addQuoteToList}
                 categories={categories} />
             </div>
             <div className="col-lg-9">
               <div className="row">
                 <MovieList
-                  movies={filterMovies(movies)} />
+                  quotes={filterQuotes(quotes)} />
               </div>
             </div>
           </div>
@@ -64,11 +64,11 @@ const Home = (props) => {
 }
 
 Home.getInitialProps = async ({ req }) => {
-  const categories = await getCategories()
-  const movies = await getMovies()
+  const categories = await getQuoteStatus()
+  const quotes = await getQuotes()
 
   return {
-    movies,
+    quotes,
     categories
   }
 }

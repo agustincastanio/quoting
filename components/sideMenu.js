@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from './modal'
 import ModalCreateForm from './movieCreateForm'
-import { createMovie } from '../actions'
+import { createQuote } from '../actions'
 
 
 class SideMenu extends React.Component {
@@ -11,10 +11,10 @@ class SideMenu extends React.Component {
     this.modal = React.createRef();
   }
 
-  handleCreateMovie = (movie, cleanCallback) => {
-    createMovie(movie)
+  handleCreateQuotee = (quote, cleanCallback) => {
+    createQuote(quote)
       .then(() => {
-        this.props.addMovieToList()
+        this.props.addQuoteToList()
         this.modal.closeModal()
         cleanCallback()
       })
@@ -24,7 +24,7 @@ class SideMenu extends React.Component {
     return (
       <div>
         <Modal ref={ele => { this.modal = ele }}>
-          <ModalCreateForm {...this.props} handleFormSubmit={this.handleCreateMovie} />
+          <ModalCreateForm {...this.props} handleFormSubmit={this.handleCreateQuote} />
         </Modal>
         <h1 className="my-4">Cotizaciones</h1>
         <div className="list-group">
