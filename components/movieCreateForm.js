@@ -1,14 +1,14 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { getAllTypes } from '../actions'
 
 class MovieCreateForm extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
 
     this.state = {
       hasInitialDataLoaded: false,
+      allTypes: {},
       form: {
         address: '',
         city: '',
@@ -24,10 +24,14 @@ class MovieCreateForm extends React.Component {
     }
   }
 
-  componentDidUpdate() {
+  async componentDidUpdate() {
     if (this.props.initialData && !this.state.hasInitialDataLoaded) {
+
+      const allTypes = await getAllTypes()
+
       this.setState({
         form: this.props.initialData,
+        allTypes: allTypes,
         hasInitialDataLoaded: true
       })
     }
@@ -40,7 +44,8 @@ class MovieCreateForm extends React.Component {
       form: {
         ...this.state.form,
         [name]: target.value
-      }
+      },
+      allTypes: { ...this.state.allTypes }
     })
   }
 
@@ -57,7 +62,8 @@ class MovieCreateForm extends React.Component {
       form: {
         ...this.state.form,
         genre: value.toString()
-      }
+      },
+      allTypes: { ...this.state.allTypes }
     })
   }
 
@@ -75,83 +81,99 @@ class MovieCreateForm extends React.Component {
           referenceCurrency: '',
           endDate: '',
           items: ''
-        }
+        },
+        allTypes: {}
       })
     })
   }
 
   render() {
-    const { form } = this.state
+    const { form, allTypes } = this.state
+
+    let optionTemplate = {}
+
+    if (Object.keys(allTypes).length !== 0) {
+      Object.keys(allTypes).forEach(function (key) {
+        optionTemplate[key] = allTypes[key].map(v => (
+          <option key={v.id} value={v.id}>{v.name}</option>
+        ));
+      });
+    } else {
+      optionTemplate = <option key="0" value="default">No hay opciones</option>
+    }
+
     return (
       <form>
         <div className="form-group">
-          <label htmlFor="name">Dirección</label>
+          <label htmlFor="address">Dirección</label>
           <input
             value={form.address}
             onChange={this.handleChange}
-            name="name"
+            name="address"
             type="text"
-            className="form-control" id="name" aria-describedby="emailHelp" placeholder="" />
+            className="form-control" id="address" placeholder="Nombre y número de la calle" />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Ciudad</label>
+          <label htmlFor="city">Ciudad</label>
           <input
             value={form.city}
             onChange={this.handleChange}
-            name="description"
+            name="city"
             type="text"
-            className="form-control" id="description" placeholder="CABA" />
+            className="form-control" id="city" placeholder="CABA" />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Rating</label>
-          <input
-            value={form.rating}
-            onChange={this.handleChange}
-            type="number"
-            name="rating"
-            max="5" min="0" className="form-control" id="rating" placeholder="3" />
-          <small id="emailHelp" className="form-text text-muted">Max: 5, Min: 0 </small>
-        </div>
-        <div className="form-group">
-          <label htmlFor="image">Image</label>
-          <input
-            value={form.image}
-            onChange={this.handleChange}
-            name="image"
-            type="text"
-            className="form-control" id="image" placeholder="http://....." />
-        </div>
-        <div className="form-group">
-          <label htmlFor="cover">Cover</label>
-          <input
-            value={form.cover}
-            onChange={this.handleChange}
-            name="cover"
-            type="text"
-            className="form-control" id="cover" placeholder="http://......" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="longDesc">Long Description</label>
-          <textarea
-            value={form.longDesc}
-            onChange={this.handleChange}
-            name="longDesc"
-            className="form-control"
-            id="longDesc" rows="3"></textarea>
-        </div>
-        <div className="form-group">
-          <label htmlFor="genre">Genre</label>
-          <select
-            onChange={this.handleGenreChange}
-            multiple className="form-control" id="genre">
-            <option>drama</option>
-            <option>music</option>
-            <option>adventure</option>
-            <option>historical</option>
-            <option>action</option>
+          <label htmlFor="addressType">Tipo de dirección</label>
+          <select className="form-control" id="addressType">
+            {optionTemplate.addressType || optionTemplate}
           </select>
         </div>
-        <button onClick={this.submitForm} type="button" className="btn btn-primary">Save changes</button>
+        <div className="form-group">
+          <label htmlFor="requestType">Tipo de cotización</label>
+          <input
+            value={form.requestType.name}
+            onChange={this.handleChange}
+            name="requestType"
+            type="text"
+            className="form-control" id="requestType" placeholder="compra especifica" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="category">Categoría</label>
+          <input
+            value={form.category.name}
+            onChange={this.handleChange}
+            name="category"
+            type="text"
+            className="form-control" id="category" placeholder="materiales gruesos" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="referencetotal">Total de referencia</label>
+          <input
+            value={form.referencetotal}
+            onChange={this.handleChange}
+            name="referencetotal"
+            type="text"
+            className="form-control" id="referencetotal" placeholder="$$$" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="referenceCurrency">Moneda</label>
+          <input
+            value={form.referenceCurrency.ISO4217Code}
+            onChange={this.handleChange}
+            name="referenceCurrency"
+            type="text"
+            className="form-control" id="referenceCurrency" placeholder="ARS" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="endDate">Fecha de vencimiento</label>
+          <input
+            value={form.endDate}
+            onChange={this.handleChange}
+            name="endDate"
+            type="text"
+            className="form-control" id="endDate" placeholder="DD-MM-AAAA" />
+        </div>
+        <button onClick={this.submitForm} type="button" className="btn btn-primary">Guardar cambios</button>
       </form>
     )
   }

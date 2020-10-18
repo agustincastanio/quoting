@@ -24,7 +24,10 @@ class SideMenu extends React.Component {
     return (
       <div>
         <Modal ref={ele => { this.modal = ele }}>
-          <ModalCreateForm {...this.props} handleFormSubmit={this.handleCreateQuote} />
+          <ModalCreateForm
+            {...this.props}
+            handleFormSubmit={this.handleCreateQuote}
+          />
         </Modal>
         <h1 className="my-4">Cotizaciones</h1>
         <div className="list-group">

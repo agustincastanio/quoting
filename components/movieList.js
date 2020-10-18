@@ -11,19 +11,15 @@ const MovieList = (props) => {
           return (
             <div key={quote.id} className="col-lg-4 col-md-6 mb-4">
               <div className="card h-100">
-                <Link href="/quotes/[id]" as={`/quotes/${quote.id}`}>
-                  <a>
-                  </a>
-                </Link>
                 <div className="card-body">
                   <h4 className="card-title">
-                    <Link href="/quotes/[id]" as={`/quotes/${quote.id}`}>
-                      <a>{quote.address}</a>
+                    <Link href="/quotes/[id]/edit" as={`/quotes/${quote.id}/edit`}>
+                      <a>{quote.address}, {quote.city}</a>
                     </Link>
                   </h4>
-                  <h6 className="card-subtitle mb-2 text-muted">{quote.city}</h6>
-                  <h5>{quote.requestType.name}</h5>
-                  <p className="card-text">{quote.referencetotal + ' ' + quote.referenceCurrency.ISO4217Code}</p>
+                  <h6 className="card-subtitle mb-2 text-muted">{quote.items.length} elementos</h6>
+                  <h5>{quote.referencetotal.toLocaleString() + ' ' + quote.referenceCurrency.ISO4217Code}</h5>
+                  <p className="card-text">{quote.requestType.name}</p>
                 </div>
                 <div className="card-footer">
                   <small className="text-muted">{quote.status.name}</small>

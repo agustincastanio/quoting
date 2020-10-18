@@ -4,17 +4,13 @@ import SideMenu from '../components/sideMenu'
 import MovieList from '../components/movieList'
 import { getQuotes, getQuoteStatus } from '../actions'
 
-const MAX_IMAGES = 3
-
 const Home = (props) => {
   const { quotes = [], categories = [] } = props
-  const [images, setImages] = useState([])
+
   const [filter, setFilter] = useState('all')
 
   useEffect(() => {
     const { quotes } = props
-    const images = quotes.slice(0, 3).map(q => ({ cover: q.cover, id: q.id }))
-    setImages(images)
   }, []);
 
   const changeCategory = (category) => {
@@ -27,7 +23,7 @@ const Home = (props) => {
     }
 
     return quotes.filter(q => {
-      return q.status && q.status.includes(filter)
+      return q.status && q.status.name.includes(filter)
     })
   }
 

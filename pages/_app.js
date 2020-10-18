@@ -1,11 +1,7 @@
-
-
 import React from 'react'
 import App from 'next/app'
 import Head from 'next/head'
 import Nav from '../components/nav'
-import Footer from '../components/footer'
-
 import '../styles/index.scss';
 
 class MyApp extends App {
@@ -36,7 +32,6 @@ class MyApp extends App {
         <div className="page-container">
           <Component {...pageProps} />
         </div>
-        <Footer />
       </div>
     )
   }
