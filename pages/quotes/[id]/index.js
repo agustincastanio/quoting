@@ -16,7 +16,7 @@ const Quote = (props) => {
         <h1 className="display-4">La dirección es {quote.address}, {quote.city}</h1>
         <p className="lead">Tiene un total de {quote.items.length} elementos</p>
         <hr className="my-4" />
-        <p>Es una {quote.requestType.name} por un valor aproximado de {quote.referencetotal.toLocaleString() + ' ' + quote.referenceCurrency.ISO4217Code}.</p>
+        <p>Es una {quote.requestType.name} por un valor aproximado de {quote.referencetotal.toLocaleString() + ' ' + quote.currency.ISO4217Code}.</p>
         <button
           onClick={() => router.push(`/quotes/${id}/edit`)}
           className="btn btn-warning btn-lg mr-1"

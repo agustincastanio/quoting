@@ -36,7 +36,7 @@ const QuoteSchema = new mongoose.Schema({
   referencetotal: {
     type: Number
   },
-  referenceCurrency: {
+  currency: {
     type: mongoose.Schema.Types.ObjectId,
     ref: Currency
   },
@@ -59,6 +59,11 @@ QuoteSchema.set('toJSON', {
     delete ret.__v;
     ret.id = ret._id.toString();
     delete ret._id;
+    ret.items.forEach(function (item) {
+      delete item.__v;
+      item.id = item._id.toString();
+      delete item._id;
+    });
   },
 });
 

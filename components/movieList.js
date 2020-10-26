@@ -18,7 +18,7 @@ const MovieList = (props) => {
                     </Link>
                   </h4>
                   <h6 className="card-subtitle mb-2 text-muted">{quote.items.length} elementos</h6>
-                  <h5>{quote.referencetotal.toLocaleString() + ' ' + quote.referenceCurrency.ISO4217Code}</h5>
+                  <h5>{quote.referencetotal.toLocaleString() + ' ' + quote.currency.ISO4217Code}</h5>
                   <p className="card-text">{quote.requestType.name}</p>
                 </div>
                 <div className="card-footer">

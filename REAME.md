@@ -1,4 +1,4 @@
-
+1. Finish UPDATE and CREATE for Quotes
 3. handle cotización endDate
 4. handle cotización referenceTotal (and different currencies)
 5. start proveedor side

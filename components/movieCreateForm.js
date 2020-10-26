@@ -17,21 +17,22 @@ class MovieCreateForm extends React.Component {
         requestType: '',
         category: '',
         referencetotal: '',
-        referenceCurrency: '',
+        currency: '',
         endDate: '',
         items: ''
       }
     }
   }
 
-  async componentDidUpdate() {
+  componentDidUpdate() {
     if (this.props.initialData && !this.state.hasInitialDataLoaded) {
 
-      const allTypes = await getAllTypes()
+      getAllTypes().then((allTypes) => {
+        this.setState({ allTypes })
+      })
 
       this.setState({
         form: this.props.initialData,
-        allTypes: allTypes,
         hasInitialDataLoaded: true
       })
     }
@@ -44,13 +45,12 @@ class MovieCreateForm extends React.Component {
       form: {
         ...this.state.form,
         [name]: target.value
-      },
-      allTypes: { ...this.state.allTypes }
+      }
     })
   }
 
-  handleGenreChange = (event) => {
-    const { options } = event.target
+  handleOptionChange = (event) => {
+    const { options, id } = event.target
     let value = [];
     for (let i = 0, l = options.length; i < l; i++) {
       if (options[i].selected) {
@@ -61,15 +61,15 @@ class MovieCreateForm extends React.Component {
     this.setState({
       form: {
         ...this.state.form,
-        genre: value.toString()
-      },
-      allTypes: { ...this.state.allTypes }
+        [id]: value.toString()
+      }
     })
   }
 
   submitForm = () => {
     this.props.handleFormSubmit(this.state.form, () => {
       this.setState({
+        allTypes: {},
         form: {
           address: '',
           city: '',
@@ -78,11 +78,10 @@ class MovieCreateForm extends React.Component {
           requestType: '',
           category: '',
           referencetotal: '',
-          referenceCurrency: '',
+          currency: '',
           endDate: '',
           items: ''
-        },
-        allTypes: {}
+        }
       })
     })
   }
@@ -94,13 +93,18 @@ class MovieCreateForm extends React.Component {
 
     if (Object.keys(allTypes).length !== 0) {
       Object.keys(allTypes).forEach(function (key) {
-        optionTemplate[key] = allTypes[key].map(v => (
-          <option key={v.id} value={v.id}>{v.name}</option>
-        ));
+        optionTemplate[key] = allTypes[key].map(function (v) {
+          return <option key={v.id} value={v.id}>{v.name}</option>
+        });
       });
     } else {
       optionTemplate = <option key="0" value="default">No hay opciones</option>
     }
+
+    //TODO: map when creating instead of editing
+    //TODO: calculate referente total
+    //TODO: add date picker
+    //TODO: add google maps address picker
 
     return (
       <form>
@@ -124,27 +128,21 @@ class MovieCreateForm extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="addressType">Tipo de dirección</label>
-          <select className="form-control" id="addressType">
+          <select className="form-control" id="addressType" value={form.addressType.id} onChange={this.handleOptionChange}>
             {optionTemplate.addressType || optionTemplate}
           </select>
         </div>
         <div className="form-group">
           <label htmlFor="requestType">Tipo de cotización</label>
-          <input
-            value={form.requestType.name}
-            onChange={this.handleChange}
-            name="requestType"
-            type="text"
-            className="form-control" id="requestType" placeholder="compra especifica" />
+          <select className="form-control" id="requestType" value={form.requestType.id} onChange={this.handleOptionChange}>
+            {optionTemplate.requestType || optionTemplate}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="category">Categoría</label>
-          <input
-            value={form.category.name}
-            onChange={this.handleChange}
-            name="category"
-            type="text"
-            className="form-control" id="category" placeholder="materiales gruesos" />
+          <select className="form-control" id="category" value={form.category.id} onChange={this.handleOptionChange}>
+            {optionTemplate.category || optionTemplate}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="referencetotal">Total de referencia</label>
@@ -156,22 +154,19 @@ class MovieCreateForm extends React.Component {
             className="form-control" id="referencetotal" placeholder="$$$" />
         </div>
         <div className="form-group">
-          <label htmlFor="referenceCurrency">Moneda</label>
-          <input
-            value={form.referenceCurrency.ISO4217Code}
-            onChange={this.handleChange}
-            name="referenceCurrency"
-            type="text"
-            className="form-control" id="referenceCurrency" placeholder="ARS" />
+          <label htmlFor="currency">Moneda</label>
+          <select className="form-control" id="currency" value={form.currency.id} onChange={this.handleOptionChange}>
+            {optionTemplate.currency || optionTemplate}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="endDate">Fecha de vencimiento</label>
           <input
-            value={form.endDate}
+            value={form.endDate.split("T")[0]}
             onChange={this.handleChange}
             name="endDate"
             type="text"
-            className="form-control" id="endDate" placeholder="DD-MM-AAAA" />
+            className="form-control" id="endDate" placeholder="AAAA-MM-DD" />
         </div>
         <button onClick={this.submitForm} type="button" className="btn btn-primary">Guardar cambios</button>
       </form>

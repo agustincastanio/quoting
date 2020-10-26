@@ -14,7 +14,7 @@ export default async function handler(req, res) {
           populate('addressType').
           populate('requestType').
           populate('category').
-          populate('referenceCurrency').
+          populate('currency').
           populate({
             path: 'items',
             populate: { path: 'item' }

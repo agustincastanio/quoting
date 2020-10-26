@@ -13,7 +13,7 @@ export const createQuote = (quote) => {
 }
 
 export const updateQuote = (quote) => {
-  return axios.patch(`${BASE_URL}/api/v1/quotes/${quote.id}`, quote)
+  return axios.put(`${BASE_URL}/api/v1/quotes/${quote.id}`, quote)
     .then(res => res.data.data)
 }
 

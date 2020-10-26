@@ -1,6 +1,39 @@
 import dbConnect from '../../../../utils/dbConnect'
 import Quote from '../../../../models/Quote'
-import QuoteStatus from '../../../../models/QuoteStatus'
+// import QuoteStatus from '../../../../models/QuoteStatus'
+
+
+//TOOD: try https://mongoosejs.com/docs/middleware.html
+const quotePreSaveHook = async function (quote) {
+    const hookedQuote = reduceObject(quote)
+
+    quote.items.forEach(function (item, index) {
+        quote.items[index] = reduceObject(item)
+    });
+
+    return hookedQuote
+}
+
+const isPlainObject = function (value) {
+    return value instanceof Object &&
+        Object.getPrototypeOf(value) == Object.prototype;
+}
+
+const reduceObject = function (object) {
+    let reducedObject = {}
+
+    Object.keys(object).forEach(function (key) {
+        if (isPlainObject(object[key])) {
+            if (object[key].id) {
+                reducedObject[key] = object[key].id
+            }
+        } else {
+            reducedObject[key] = object[key]
+        }
+    });
+
+    return reducedObject
+}
 
 export default async function handler(req, res) {
     const {
@@ -18,7 +51,7 @@ export default async function handler(req, res) {
                     populate('addressType').
                     populate('requestType').
                     populate('category').
-                    populate('referenceCurrency').
+                    populate('currency').
                     populate({
                         path: 'items',
                         populate: { path: 'item' }
@@ -34,7 +67,9 @@ export default async function handler(req, res) {
 
         case 'PUT' /* Edit a model by its ID */:
             try {
-                const quote = await Quote.findByIdAndUpdate(id, req.body, {
+                const newQuote = await quotePreSaveHook(req.body)
+
+                const quote = await Quote.findByIdAndUpdate(id, newQuote, {
                     new: true,
                     runValidators: true,
                 }).
@@ -42,7 +77,7 @@ export default async function handler(req, res) {
                     populate('addressType').
                     populate('requestType').
                     populate('category').
-                    populate('referenceCurrency').
+                    populate('currency').
                     populate({
                         path: 'items',
                         populate: { path: 'item' }
@@ -52,12 +87,14 @@ export default async function handler(req, res) {
                 }
                 res.status(200).json({ success: true, data: quote })
             } catch (error) {
+                console.log(error)
                 res.status(400).json({ success: false })
             }
             break
 
         case 'DELETE' /* Delete a model by its ID */:
             try {
+
                 /*
                 const quoteStatuses = await QuoteStatus.find({})
                 const archivedStatusId = quoteStatuses.find((status) => status.name === 'Archivada')

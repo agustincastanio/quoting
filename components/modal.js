@@ -18,7 +18,7 @@ class Modal extends React.Component {
     return (
       <div>
         <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Nueva Solicitud
+          Nueva Cotización!
         </button>
 
         <div className="modal fade"
@@ -27,7 +27,7 @@ class Modal extends React.Component {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 className="modal-title" id="exampleModalLabel">Crear una cotización</h5>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -36,7 +36,7 @@ class Modal extends React.Component {
                 {React.cloneElement(onlyChild, { cleanup: this.closeModal })}
               </div>
               <div className="modal-footer">
-                <button ref={(ele) => { this.closeButton = ele }} type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button ref={(ele) => { this.closeButton = ele }} type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
               </div>
             </div>
           </div>
