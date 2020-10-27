@@ -1,6 +1,6 @@
 import React from 'react'
 import Router from 'next/router';
-import { getQuoteById, updateQuote } from '../../../actions'
+import { getQuoteById, updateQuote, getAllTypes } from '../../../actions'
 import MovieCreateForm from '../../../components/movieCreateForm'
 
 class Edit extends React.Component {
@@ -9,31 +9,46 @@ class Edit extends React.Component {
     return { query }
   }
 
-  state = {
-    quote: {}
+  constructor(props) {
+    super(props)
+    this.state = {
+      quote: {},
+      allTypes: {}
+    }
   }
 
-  handleQuoteUpdate = (quote, cleanCallback) => {
+  handleQuoteUpdate = (quote) => {
     updateQuote(quote)
       .then(() => {
         Router.push('/')
       })
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { id } = this.props.query
-    getQuoteById(id).then((quote) => {
-      this.setState({ quote })
+
+    let promises = []
+
+    promises.push(getQuoteById(id))
+    promises.push(getAllTypes())
+
+    const result = await Promise.all(promises);
+
+    this.setState({
+      quote: result[0],
+      allTypes: result[1]
     })
   }
 
   render() {
-    const { quote } = this.state
+    const { quote, allTypes } = this.state
+
     return (
       <div className="container">
         <h1>Editar la cotización</h1>
         <MovieCreateForm
           initialData={quote}
+          allTypesData={allTypes}
           handleFormSubmit={this.handleQuoteUpdate} />
       </div>
     )

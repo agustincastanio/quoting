@@ -1,5 +1,4 @@
 import React from 'react'
-import { getAllTypes } from '../actions'
 
 class MovieCreateForm extends React.Component {
 
@@ -8,6 +7,7 @@ class MovieCreateForm extends React.Component {
 
     this.state = {
       hasInitialDataLoaded: false,
+      hasInitialTypesLoaded: false,
       allTypes: {},
       form: {
         address: '',
@@ -25,27 +25,32 @@ class MovieCreateForm extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.initialData && !this.state.hasInitialDataLoaded) {
 
-      getAllTypes().then((allTypes) => {
-        this.setState({ allTypes })
-      })
-
+    if (!this.state.hasInitialDataLoaded && this.props.initialData) {
       this.setState({
         form: this.props.initialData,
         hasInitialDataLoaded: true
       })
     }
+
+    if (!this.state.hasInitialTypesLoaded && this.props.allTypesData) {
+      this.setState({
+        allTypes: this.props.allTypesData,
+        hasInitialTypesLoaded: true
+      })
+    }
   }
 
   handleChange = (event) => {
+
     const target = event.target
     const name = target.name
     this.setState({
       form: {
         ...this.state.form,
         [name]: target.value
-      }
+      },
+      allTypes: { ...this.state.allTypes }
     })
   }
 
@@ -62,7 +67,8 @@ class MovieCreateForm extends React.Component {
       form: {
         ...this.state.form,
         [id]: value.toString()
-      }
+      },
+      allTypes: { ...this.state.allTypes }
     })
   }
 
@@ -87,6 +93,7 @@ class MovieCreateForm extends React.Component {
   }
 
   render() {
+
     const { form, allTypes } = this.state
 
     let optionTemplate = {}
@@ -101,7 +108,6 @@ class MovieCreateForm extends React.Component {
       optionTemplate = <option key="0" value="default">No hay opciones</option>
     }
 
-    //TODO: map when creating instead of editing
     //TODO: calculate referente total
     //TODO: add date picker
     //TODO: add google maps address picker
@@ -162,7 +168,7 @@ class MovieCreateForm extends React.Component {
         <div className="form-group">
           <label htmlFor="endDate">Fecha de vencimiento</label>
           <input
-            value={form.endDate.split("T")[0]}
+            value={form.endDate}
             onChange={this.handleChange}
             name="endDate"
             type="text"

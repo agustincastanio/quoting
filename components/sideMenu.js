@@ -1,34 +1,22 @@
 import React from 'react'
-import Modal from './modal'
-import ModalCreateForm from './movieCreateForm'
-import { createQuote } from '../actions'
+import Router from 'next/router';
 
 
 class SideMenu extends React.Component {
 
   constructor(props) {
     super(props)
-    this.modal = React.createRef();
-  }
-
-  handleCreateQuotee = (quote, cleanCallback) => {
-    createQuote(quote)
-      .then(() => {
-        this.props.addQuoteToList()
-        this.modal.closeModal()
-        cleanCallback()
-      })
   }
 
   render() {
     return (
       <div>
-        <Modal ref={ele => { this.modal = ele }}>
-          <ModalCreateForm
-            {...this.props}
-            handleFormSubmit={this.handleCreateQuote}
-          />
-        </Modal>
+        <button
+          onClick={() => Router.push(`/quotes/create`)}
+          className="btn btn-primary btn-lg mr-1"
+          type="button">Nueva cotización!
+        </button>
+
         <h1 className="my-4">Cotizaciones</h1>
         <div className="list-group">
           <a
