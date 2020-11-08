@@ -1,4 +1,7 @@
 import React from 'react'
+import ModalItem from './modalItem'
+import QuoteAddItemForm from './quoteAddItemForm'
+import { updateQuote } from '../actions'
 
 class MovieCreateForm extends React.Component {
 
@@ -19,7 +22,7 @@ class MovieCreateForm extends React.Component {
         referencetotal: '',
         currency: '',
         endDate: '',
-        items: ''
+        items: []
       }
     }
   }
@@ -51,6 +54,13 @@ class MovieCreateForm extends React.Component {
         [name]: target.value
       },
       allTypes: { ...this.state.allTypes }
+    })
+  }
+
+  handleAddItem = (quote) => {
+    updateQuote(quote).then(() => {
+      modal.closeModal()
+      router.push('/')
     })
   }
 
@@ -86,13 +96,15 @@ class MovieCreateForm extends React.Component {
           referencetotal: '',
           currency: '',
           endDate: '',
-          items: ''
+          items: []
         }
       })
     })
   }
 
   render() {
+
+    let modal = null
 
     const { form, allTypes } = this.state
 
@@ -174,7 +186,18 @@ class MovieCreateForm extends React.Component {
             type="text"
             className="form-control" id="endDate" placeholder="AAAA-MM-DD" />
         </div>
-        <button onClick={this.submitForm} type="button" className="btn btn-primary">Guardar cambios</button>
+        <div>
+          <div>
+            <button onClick={this.submitForm} type="button" className="btn btn-primary mr-2">Guardar cambios</button>
+            <button type="button" className="btn btn-warning mr-2" data-toggle="modal" data-target="#itemModal">Modificar materiales</button>
+            <ModalItem ref={ele => modal = ele} hasSubmit={false}>
+              <QuoteAddItemForm
+                handleFormSubmit={this.handleAddItem}
+                allItems={form.items}
+              />
+            </ModalItem>
+          </div>
+        </div>
       </form>
     )
   }

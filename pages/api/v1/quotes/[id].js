@@ -54,7 +54,13 @@ export default async function handler(req, res) {
                     populate('currency').
                     populate({
                         path: 'items',
-                        populate: { path: 'item' }
+                        populate: {
+                            path: 'item',
+                            populate: [
+                                { path: 'unitType' },
+                                { path: 'referencePriceUnity' }
+                            ]
+                        }
                     })
                 if (!quote) {
                     return res.status(400).json({ success: false })

@@ -1,7 +1,8 @@
-1. Finish UPDATE and CREATE for Quotes
+1. Finish Quote Item CRUD (with autocomplete)
+2. Product CRUD
 3. handle cotización endDate
 4. handle cotización referenceTotal (and different currencies)
-5. start proveedor side
+5. start proveedor side (link sharing)
 6. fix serverless cold starts
 7. remove movie from URL path
 8. google maps address autocomplete
