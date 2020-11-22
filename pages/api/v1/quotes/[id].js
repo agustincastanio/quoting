@@ -1,7 +1,5 @@
 import dbConnect from '../../../../utils/dbConnect'
 import Quote from '../../../../models/Quote'
-// import QuoteStatus from '../../../../models/QuoteStatus'
-
 
 //TOOD: try https://mongoosejs.com/docs/middleware.html
 const quotePreSaveHook = async function (quote) {

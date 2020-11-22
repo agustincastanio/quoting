@@ -35,8 +35,6 @@ class QuoteAddItemForm extends React.Component {
 
         const { items } = this.state
 
-        console.log(items)
-
         let optionTemplateItems = []
 
         if (items.length !== 0) {
