@@ -4,15 +4,9 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-}
-
-module.exports = {
   env: {
     SERVER: process.env.SERVER,
   },
-};
-
-module.exports = {
   async headers() {
     return [
       {

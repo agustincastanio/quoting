@@ -32,7 +32,7 @@ export const getQuoteStatus = () => {
     .then(res => res.data.data)
 }
 
-export const getAllTypes= () => {
+export const getAllTypes = () => {
   return axios.get(`${BASE_URL}/api/v1/allTypes`)
     .then(res => res.data.data)
 }
