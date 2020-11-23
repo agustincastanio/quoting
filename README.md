@@ -28,6 +28,8 @@
 
     Import backup from sample_data folder
 
+    Add user and DB credentials to .env.local
+
     Start the project with "npm run dev"
 
     Go to http://localhost:3000 and verify it is working
@@ -37,9 +39,9 @@
 ---
 
 #### PROD builds are hosted on:
-. Vercel
-. Github
-. MongoDB Atlas
-. Namecheap Domain registration
-. Cloudflare DNS and CDN
-. Auth0
+* Vercel
+* Github
+* MongoDB Atlas
+* Namecheap Domain registration
+* Cloudflare DNS and CDN
+* Auth0
