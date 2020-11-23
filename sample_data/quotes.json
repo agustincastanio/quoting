@@ -1,0 +1,138 @@
+[{
+  "_id": {
+    "$oid": "5f7a581bbd54622a18c40e4e"
+  },
+  "address": "Paraguay 3822",
+  "city": "CABA",
+  "status": {
+    "$oid": "5f7a4ded184bb31b88e2146f"
+  },
+  "addressType": {
+    "$oid": "5f7a32fda6f2520404a1408e"
+  },
+  "requestType": {
+    "$oid": "5f7a33a83895524ef84827a6"
+  },
+  "category": {
+    "$oid": "5f7a4dcc184bb31b88e2146e"
+  },
+  "referencetotal": 500000,
+  "currency": {
+    "$oid": "5f7a3a55b4a306538c9c684a"
+  },
+  "items": [
+    {
+      "_id": {
+        "$oid": "5fb96c6d02cdbf2bf0447201"
+      },
+      "item": {
+        "$oid": "5f7a472375fabd3c3011edeb"
+      },
+      "quantity": 1250
+    },
+    {
+      "_id": {
+        "$oid": "5fb96c6d02cdbf2bf0447202"
+      },
+      "item": {
+        "$oid": "5f7a48cecdf25630d4b27015"
+      },
+      "quantity": 700
+    },
+    {
+      "_id": {
+        "$oid": "5fb96c6d02cdbf2bf0447203"
+      },
+      "item": {
+        "$oid": "5f7a48f8cdf25630d4b27016"
+      },
+      "quantity": 200
+    },
+    {
+      "_id": {
+        "$oid": "5fb96c6d02cdbf2bf0447204"
+      },
+      "item": {
+        "$oid": "5f7a4934c15cf81514944b04"
+      },
+      "quantity": 4
+    },
+    {
+      "_id": {
+        "$oid": "5fb96c6d02cdbf2bf0447205"
+      },
+      "item": {
+        "$oid": "5f7a4948c15cf81514944b05"
+      },
+      "quantity": 20
+    }
+  ],
+  "endDate": {
+    "$date": "2020-10-04T23:17:47.327Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f94b1ffa2416e6b565492df"
+  },
+  "address": "Moreno 114",
+  "city": "CABA",
+  "status": {
+    "$oid": "5f7a4ded184bb31b88e2146f"
+  },
+  "addressType": {
+    "$oid": "5f7a32fda6f2520404a1408e"
+  },
+  "requestType": {
+    "$oid": "5f7a33a83895524ef84827a6"
+  },
+  "category": {
+    "$oid": "5f7a4dcc184bb31b88e2146e"
+  },
+  "referencetotal": 200001,
+  "currency": {
+    "$oid": "5f7a3a83b4a306538c9c684b"
+  },
+  "items": [
+    {
+      "_id": {
+        "$oid": "5f95fffff5c78433c4249571"
+      },
+      "item": {
+        "$oid": "5f7a472375fabd3c3011edeb"
+      },
+      "quantity": 1250
+    },
+    {
+      "_id": {
+        "$oid": "5f95fffff5c78433c4249572"
+      },
+      "item": {
+        "$oid": "5f7a48cecdf25630d4b27015"
+      },
+      "quantity": 700
+    },
+    {
+      "_id": {
+        "$oid": "5f95fffff5c78433c4249573"
+      },
+      "item": {
+        "$oid": "5f7a48f8cdf25630d4b27016"
+      },
+      "quantity": 200
+    },
+    {
+      "_id": {
+        "$oid": "5f95fffff5c78433c4249574"
+      },
+      "item": {
+        "$oid": "5f7a4934c15cf81514944b04"
+      },
+      "quantity": 4
+    }
+  ],
+  "endDate": {
+    "$date": "2020-10-04T23:17:47.327Z"
+  },
+  "__v": 0
+}]

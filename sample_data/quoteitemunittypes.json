@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "5f7a3ed4270e1d3e0c2221ff"
+  },
+  "name": "unidad",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a3ef2270e1d3e0c222200"
+  },
+  "name": "kilogramo",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a3f06270e1d3e0c222201"
+  },
+  "name": "bolsa 25kg",
+  "__v": 0
+}]

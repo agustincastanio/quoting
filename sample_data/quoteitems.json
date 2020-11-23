@@ -1,0 +1,71 @@
+[{
+  "_id": {
+    "$oid": "5f7a472375fabd3c3011edeb"
+  },
+  "name": "ladrillo hueco del 8",
+  "unitType": {
+    "$oid": "5f7a3ed4270e1d3e0c2221ff"
+  },
+  "additionalInfo": "",
+  "referencePriceUnity": {
+    "$oid": "5f7a3a55b4a306538c9c684a"
+  },
+  "referencePrice": "200",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a48cecdf25630d4b27015"
+  },
+  "name": "ladrillo hueco del 12",
+  "unitType": {
+    "$oid": "5f7a3ed4270e1d3e0c2221ff"
+  },
+  "additionalInfo": "8 pallets",
+  "referencePriceUnity": {
+    "$oid": "5f7a3a55b4a306538c9c684a"
+  },
+  "referencePrice": "201",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a48f8cdf25630d4b27016"
+  },
+  "name": "cemento",
+  "unitType": {
+    "$oid": "5f7a3f06270e1d3e0c222201"
+  },
+  "additionalInfo": "loma negra",
+  "referencePriceUnity": {
+    "$oid": "5f7a3a55b4a306538c9c684a"
+  },
+  "referencePrice": "202",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a4934c15cf81514944b04"
+  },
+  "name": "cerecita",
+  "unitType": {
+    "$oid": "5f7a3ef2270e1d3e0c222200"
+  },
+  "additionalInfo": "sika o similar",
+  "referencePriceUnity": {
+    "$oid": "5f7a3a55b4a306538c9c684a"
+  },
+  "referencePrice": "203",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a4948c15cf81514944b05"
+  },
+  "name": "hierro aleteado del 8",
+  "unitType": {
+    "$oid": "5f7a3ed4270e1d3e0c2221ff"
+  },
+  "additionalInfo": "",
+  "referencePriceUnity": {
+    "$oid": "5f7a3a55b4a306538c9c684a"
+  },
+  "referencePrice": "204",
+  "__v": 0
+}]

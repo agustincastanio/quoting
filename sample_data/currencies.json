@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "5f7a3a55b4a306538c9c684a"
+  },
+  "name": "pesos argentinos",
+  "ISO4217Code": "ARS",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a3a83b4a306538c9c684b"
+  },
+  "name": "dólares",
+  "ISO4217Code": "USD",
+  "__v": 0
+}]

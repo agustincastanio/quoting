@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "5f7a4ded184bb31b88e2146f"
+  },
+  "name": "Activa",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a4df1184bb31b88e21470"
+  },
+  "name": "Archivada",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f7a4df5184bb31b88e21471"
+  },
+  "name": "Borrador",
+  "__v": 0
+}]
